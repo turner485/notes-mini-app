@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-const url = 'http://13.41.75.26:8000';
+// const url = 'http://13.41.75.26:8000/';
 
 const NotePage = () => {
     const { id } = useParams();
@@ -14,7 +14,7 @@ const NotePage = () => {
 
     let getNotes = async () => {
         if (id === 'new') return
-        let res = await fetch(url +`/api/notes/${id}/`);
+        let res = await fetch(`/api/notes/${id}/`);
         const contentType = res.headers.get('content-type');
         if (contentType && contentType.includes('application/json')) {
             let data = await res.json();
@@ -24,7 +24,7 @@ const NotePage = () => {
 
     let CSRF = document.cookie.slice(10)
     let updateNote = async () => {
-        fetch(url + `/api/notes/${id}/`, {
+        fetch(`/api/notes/${id}/`, {
             credentials: 'include',
             method: 'PUT',
             headers: {
@@ -36,7 +36,7 @@ const NotePage = () => {
     }
 
     let createNote = async () => {
-        fetch(url + `/api/notes/`, {
+        fetch(`/api/notes/`, {
             credentials: 'include',
             method: 'POST',
             headers: {
@@ -48,7 +48,7 @@ const NotePage = () => {
     }
 
     let deleteNote = async () => {
-        fetch(url + `/api/notes/${id}/`, {
+        fetch(`/api/notes/${id}/`, {
             credentials: 'include',
             method: 'DELETE',
             headers: {
